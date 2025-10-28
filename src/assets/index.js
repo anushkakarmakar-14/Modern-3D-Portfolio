@@ -29,7 +29,6 @@ import flask from "./tech/flask.png";
 import cpp from "./tech/cpp.png";
 import python from "./tech/python.png";
 
-
 import meta from "./company/meta.png";
 import shopify from "./company/shopify.png";
 import starbucks from "./company/starbucks.png";
@@ -38,12 +37,11 @@ import tesla from "./company/tesla.png";
 import carrent from "./carrent.png";
 import jobit from "./jobit.png";
 import tripguide from "./tripguide.png";
-import Resumind from "./resumind.png"
-import signalist from "./signalist.png"
-import Realtor from "./realtor.png"
-import Camp from "./camp.png"
-import Robocar from "./Robocar.jpeg"
-
+import Resumind from "./resumind.png";
+import signalist from "./signalist.png";
+import Realtor from "./Realtor.png"; // Fixed - capital R to match filename
+import Camp from "./camp.png";
+import Robocar from "./Robocar.jpeg";
 
 export {
   logo,
