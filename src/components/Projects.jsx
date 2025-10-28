@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import Tilt from "react-tilt";
+import Tilt from "react-parallax-tilt";
 import { motion, AnimatePresence } from "framer-motion";
 
 import { styles } from "../styles";
@@ -32,11 +32,10 @@ const ProjectCard = ({
       layout
     >
       <Tilt
-        options={{
-          max: 45,
-          scale: 1,
-          speed: 450,
-        }}
+        tiltMaxAngleX={10}
+  tiltMaxAngleY={10}
+  scale={1.05}
+  transitionSpeed={450}
         className='bg-tertiary p-5 rounded-2xl sm:w-[360px] w-full h-full'
       >
         <div className='relative w-full h-[230px] group'>
@@ -335,7 +334,7 @@ const Projects = () => {
         Debug: Active: {activeCategory}, Total: {categoryProjects.length}, Showing: {filteredProjects.length}, ShowAll: {showAll.toString()}, Button: {shouldShowButton ? "SHOWING" : "HIDDEN"}
       </div> */}
     </>
-    
+
   );
 };
 
