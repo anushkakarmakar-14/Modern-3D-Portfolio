@@ -1,5 +1,5 @@
 import React from "react";
-import Tilt from "react-tilt";
+import Tilt from "react-parallax-tilt";
 import { motion } from "framer-motion";
 
 import { styles } from "../styles";
@@ -11,17 +11,18 @@ import { fadeIn, textVariant } from "../utils/motion";
 import aboutImage from "../assets/about-image.png";
 
 const ServiceCard = ({ index, title, icon }) => (
-  <Tilt className='xs:w-[250px] w-full'>
+  <Tilt 
+    tiltMaxAngleX={10}
+    tiltMaxAngleY={10}
+    scale={1.05}
+    transitionSpeed={450}
+    className='xs:w-[250px] w-full'
+  >
     <motion.div
       variants={fadeIn("right", "spring", index * 0.5, 0.75)}
       className='w-full green-pink-gradient p-[1px] rounded-[20px] shadow-card'
     >
       <div
-        options={{
-          max: 45,
-          scale: 1,
-          speed: 450,
-        }}
         className='bg-tertiary rounded-[20px] py-5 px-12 min-h-[280px] flex justify-evenly items-center flex-col'
       >
         <img
@@ -101,13 +102,14 @@ const About = () => {
               >
                 {/* 3D Tilt effect container */}
                 <Tilt
-                  options={{
-                    max: 25,
-                    scale: 1,
-                    speed: 300,
-                    glare: true,
-                    "max-glare": 0.3,
-                  }}
+                  tiltMaxAngleX={15}
+                  tiltMaxAngleY={15}
+                  scale={1.05}
+                  transitionSpeed={300}
+                  glareEnable={true}
+                  glareMaxOpacity={0.3}
+                  glareColor="#ffffff"
+                  glarePosition="all"
                   className="tilt-element"
                 >
                   <motion.div
