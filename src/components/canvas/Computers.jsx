@@ -1,36 +1,57 @@
 import React, { Suspense, useEffect, useState } from "react";
 import { Canvas } from "@react-three/fiber";
-import { OrbitControls, Preload, useGLTF } from "@react-three/drei";
+import { Preload, useGLTF } from "@react-three/drei";
 
 import CanvasLoader from "../Loader";
 
 const Computers = ({ isMobile }) => {
   const computer = useGLTF("/desktop_pc/scene.gltf");
 
+  console.log("Computer model loaded:", computer);
+
   return (
-    <mesh>
-      <hemisphereLight intensity={0.15} groundColor='black' />
-      <spotLight
-        position={[-20, 50, 10]}
-        angle={0.12}
-        penumbra={1}
+    <group>
+      {/* Basic lighting that always works */}
+      <ambientLight intensity={0.5} />
+      <directionalLight
+        position={[5, 5, 5]}
         intensity={1}
         castShadow
-        shadow-mapSize={1024}
+        shadow-mapSize-width={1024}
+        shadow-mapSize-height={1024}
       />
-      <pointLight intensity={1} />
+      
       <primitive
         object={computer.scene}
-        scale={isMobile ? 0.7 : 0.75}
-        position={isMobile ? [0, -3, -2.2] : [0, -3.25, -1.5]}
-        rotation={[-0.01, -0.2, -0.1]}
+        scale={isMobile ? 0.5 : 0.6}
+        position={[0, -1, 0]} // Simplified position
+        rotation={[0, 0, 0]} // No rotation
       />
-    </mesh>
+    </group>
+  );
+};
+
+// Simple fallback component
+const FallbackComputer = () => {
+  return (
+    <group>
+      <ambientLight intensity={0.5} />
+      <directionalLight position={[5, 5, 5]} intensity={1} />
+      <mesh>
+        <boxGeometry args={[2, 1.5, 0.1]} />
+        <meshStandardMaterial color="#4a4a4a" />
+      </mesh>
+      <mesh position={[0, -1, 0]}>
+        <boxGeometry args={[2.5, 0.1, 1]} />
+        <meshStandardMaterial color="#333" />
+      </mesh>
+    </group>
   );
 };
 
 const ComputersCanvas = () => {
   const [isMobile, setIsMobile] = useState(false);
+  const [modelError, setModelError] = useState(false);
 
   useEffect(() => {
     const mediaQuery = window.matchMedia("(max-width: 500px)");
@@ -49,34 +70,28 @@ const ComputersCanvas = () => {
 
   return (
     <Canvas
-      frameloop='demand'
-      shadows
-      dpr={[1, 2]}
-      camera={{ 
-        position: [20, 3, 5], 
-        fov: 25,
-        near: 0.1,
-        far: 1000 
+      style={{
+        width: '100%',
+        height: '100%',
+        background: 'transparent'
       }}
-      gl={{ preserveDrawingBuffer: true }}
+      camera={{
+        position: [0, 0, 6],
+        fov: 45,
+        near: 0.1,
+        far: 100
+      }}
+      gl={{ antialias: true }}
     >
+      <color attach="background" args={['transparent']} />
+      
       <Suspense fallback={<CanvasLoader />}>
-        <OrbitControls
-          enableZoom={false}
-          enablePan={false} // Disable panning
-          maxPolarAngle={Math.PI / 2}
-          minPolarAngle={Math.PI / 2.5} // Allow some downward movement
-          maxAzimuthAngle={Math.PI / 4} // Limit left/right rotation
-          minAzimuthAngle={-Math.PI / 4}
-          enableDamping={true} // Smooth movement
-          dampingFactor={0.05}
-          autoRotate={true} // Keep it rotating slowly
-          autoRotateSpeed={1}
-        />
-        <Computers isMobile={isMobile} />
+        {modelError ? (
+          <FallbackComputer />
+        ) : (
+          <Computers isMobile={isMobile} />
+        )}
       </Suspense>
-
-      <Preload all />
     </Canvas>
   );
 };
