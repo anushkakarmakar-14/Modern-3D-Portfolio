@@ -40,7 +40,7 @@ import tripguide from "./tripguide.png";
 import Resumind from "./resumind.png";
 import signalist from "./signalist.png";
 import Realtor from "./Realtor.png"; // Fixed - capital R to match filename
-import Camp from "./camp.png";
+// import Camp from "./camp.png";
 import Robocar from "./Robocar.jpeg";
 
 export {
@@ -83,6 +83,6 @@ export {
   Resumind,
   signalist,
   Realtor,
-  Camp,
+  // Camp,
   Robocar,
 };
