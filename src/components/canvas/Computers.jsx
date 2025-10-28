@@ -5,7 +5,6 @@ import { OrbitControls, Preload, useGLTF } from "@react-three/drei";
 import CanvasLoader from "../Loader";
 
 const Computers = ({ isMobile }) => {
-  // Try different paths - the model should be in public folder
   const computer = useGLTF("/desktop_pc/scene.gltf");
 
   return (
@@ -28,22 +27,6 @@ const Computers = ({ isMobile }) => {
       />
     </mesh>
   );
-};
-
-// Add error boundary component
-const ComputersWithErrorBoundary = ({ isMobile }) => {
-  try {
-    return <Computers isMobile={isMobile} />;
-  } catch (error) {
-    console.error("Error loading computer model:", error);
-    return (
-      <mesh>
-        <boxGeometry args={[2, 1, 1]} />
-        <meshStandardMaterial color="gray" />
-        <pointLight intensity={1} position={[0, 5, 5]} />
-      </mesh>
-    );
-  }
 };
 
 const ComputersCanvas = () => {
@@ -69,16 +52,28 @@ const ComputersCanvas = () => {
       frameloop='demand'
       shadows
       dpr={[1, 2]}
-      camera={{ position: [20, 3, 5], fov: 25 }}
+      camera={{ 
+        position: [20, 3, 5], 
+        fov: 25,
+        near: 0.1,
+        far: 1000 
+      }}
       gl={{ preserveDrawingBuffer: true }}
     >
       <Suspense fallback={<CanvasLoader />}>
         <OrbitControls
           enableZoom={false}
+          enablePan={false} // Disable panning
           maxPolarAngle={Math.PI / 2}
-          minPolarAngle={Math.PI / 2}
+          minPolarAngle={Math.PI / 2.5} // Allow some downward movement
+          maxAzimuthAngle={Math.PI / 4} // Limit left/right rotation
+          minAzimuthAngle={-Math.PI / 4}
+          enableDamping={true} // Smooth movement
+          dampingFactor={0.05}
+          autoRotate={true} // Keep it rotating slowly
+          autoRotateSpeed={1}
         />
-        <ComputersWithErrorBoundary isMobile={isMobile} />
+        <Computers isMobile={isMobile} />
       </Suspense>
 
       <Preload all />
