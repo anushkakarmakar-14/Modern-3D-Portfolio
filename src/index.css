@@ -33,6 +33,30 @@
   ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 
+/* Fix for navbar link colors */
+nav a {
+  color: inherit !important;
+}
+
+/* Ensure consistent secondary color */
+.text-secondary {
+  color: #aaa6c3 !important;
+}
+
+/* Fix hover states */
+nav li:hover a {
+  color: white !important;
+}
+
+/* Specific fix for mobile menu */
+nav li.font-poppins a {
+  color: inherit !important;
+}
+
+nav li.font-poppins:hover a {
+  color: #67e8f9 !important; /* cyan-400 for mobile hover */
+}
+
 .violet-gradient {
   background: #804dee;
   background: linear-gradient(-90deg, #804dee 0%, rgba(60, 51, 80, 0) 100%);

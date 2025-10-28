@@ -38,6 +38,12 @@ import tesla from "./company/tesla.png";
 import carrent from "./carrent.png";
 import jobit from "./jobit.png";
 import tripguide from "./tripguide.png";
+import Resumind from "./resumind.png"
+import signalist from "./signalist.png"
+import Realtor from "./realtor.png"
+import Camp from "./camp.png"
+import Robocar from "./Robocar.jpeg"
+
 
 export {
   logo,
@@ -76,4 +82,9 @@ export {
   carrent,
   jobit,
   tripguide,
+  Resumind,
+  signalist,
+  Realtor,
+  Camp,
+  Robocar,
 };

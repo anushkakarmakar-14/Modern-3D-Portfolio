@@ -9,13 +9,14 @@ const Hero = () => {
   const [isDeleting, setIsDeleting] = useState(false);
   const [typingSpeed, setTypingSpeed] = useState(150);
 
-  const roles = [
-    "FullStack Developer",
-    "UI/UX Enthusiast",
-    "AI/ML Enthusiast",
-    "Creative Coder", 
-    "Problem Solver"
-  ];
+ const roles = [
+    "Full-Stack Developer",
+    "Data Enthusiast", 
+    "Visualization Specialist",
+    "AI/ML Explorer",
+    "Creative Problem Solver"
+];
+  
 
   useEffect(() => {
     let timer;
@@ -63,7 +64,7 @@ const Hero = () => {
 
         <div>
           <h1 className={`${styles.heroHeadText} text-white`}>
-            Hi, I'm <span className='text-[#915EFF]'>Anushka Karmakar</span>
+            Hi, I'm <span className='text-[#915EFF]'>Anushka</span>
           </h1>
           <p className={`${styles.heroSubText} mt-2 text-white-100`}>
             Turning Imagination into Interactive Experiences <br className='sm:block hidden' />
