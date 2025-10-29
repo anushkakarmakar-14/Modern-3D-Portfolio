@@ -1,4 +1,4 @@
-import React, { Suspense } from "react";
+import React, { Suspense, useState, useEffect } from "react";
 import { Canvas } from "@react-three/fiber";
 import { OrbitControls, Preload, useGLTF } from "@react-three/drei";
 
@@ -12,7 +12,43 @@ const Earth = () => {
   );
 };
 
+// Static Earth component for mobile
+const EarthStatic = () => {
+  return (
+    <div className="w-full h-full flex items-center justify-center">
+      <img 
+        src="/images/earth-static.png" 
+        alt="Earth" 
+        className="w-64 h-64 object-contain opacity-90"
+      />
+    </div>
+  );
+};
+
 const EarthCanvas = () => {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    // Check if mobile
+    const mediaQuery = window.matchMedia("(max-width: 500px)");
+    setIsMobile(mediaQuery.matches);
+
+    const handleMediaQueryChange = (event) => {
+      setIsMobile(event.matches);
+    };
+
+    mediaQuery.addEventListener("change", handleMediaQueryChange);
+
+    return () => {
+      mediaQuery.removeEventListener("change", handleMediaQueryChange);
+    };
+  }, []);
+
+  // Show static image on mobile, 3D Earth on desktop
+  if (isMobile) {
+    return <EarthStatic />;
+  }
+
   return (
     <Canvas
       shadows
