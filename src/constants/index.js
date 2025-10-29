@@ -33,7 +33,7 @@ import {
   Resumind,
   signalist,
   Realtor,
-  Camp,
+  // Camp,
   Robocar,
 } from "../assets";
 
@@ -110,10 +110,10 @@ const technologies = [
     name: "React JS",
     icon: reactjs,
   },
-  {
-    name: "Redux Toolkit",
-    icon: redux,
-  },
+  // {
+  //   name: "Redux Toolkit",
+  //   icon: redux,
+  // },
   {
     name: "Tailwind CSS",
     icon: tailwind,
@@ -127,8 +127,20 @@ const technologies = [
     icon: mongodb,
   },
   {
-    name: "Three JS",
-    icon: threejs,
+    name: "SQL",
+    icon: mysql,
+  },
+  // {
+  //   name: "Three JS",
+  //   icon: threejs,
+  // },
+  {
+    name: "C++",
+    icon: cpp,
+  },
+   {
+    name: "Python",
+    icon: python,
   },
   {
     name: "git",
@@ -138,38 +150,29 @@ const technologies = [
     name: "figma",
     icon: figma,
   },
-  {
-    name: "docker",
-    icon: docker,
-  },
-  {
-    name: "Python",
-    icon: python,
-  },
-  {
-    name: "C++",
-    icon: cpp,
-  },
-  {
-    name: "MySQL",
-    icon: mysql,
-  },
-  {
-    name: "PostgreSQL",
-    icon: postgresql,
-  },
-  {
-    name: "Firebase",
-    icon: firebase,
-  },
-  {
-    name: "Flask",
-    icon: flask,
-  },
-  {
-    name: "Django",
-    icon: django,
-  },
+  // {
+  //   name: "docker",
+  //   icon: docker,
+  // },
+ 
+  
+  
+  // {
+  //   name: "PostgreSQL",
+  //   icon: postgresql,
+  // },
+  // {
+  //   name: "Firebase",
+  //   icon: firebase,
+  // },
+  // {
+  //   name: "Flask",
+  //   icon: flask,
+  // },
+  // {
+  //   name: "Django",
+  //   icon: django,
+  // },
 ];
 
 const experiences = [
