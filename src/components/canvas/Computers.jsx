@@ -28,6 +28,19 @@ const Computers = ({ isMobile }) => {
   );
 };
 
+// Static computer component for mobile - USING IMAGE
+const ComputersStatic = () => {
+  return (
+    <div className="w-full h-full flex items-center justify-center">
+      <img 
+        src="/images/hero-computer-static.png" 
+        alt="Computer" 
+        className="w-80 h-64 object-contain opacity-90"
+      />
+    </div>
+  );
+};
+
 const ComputersCanvas = () => {
   const [isMobile, setIsMobile] = useState(false);
 
@@ -45,6 +58,11 @@ const ComputersCanvas = () => {
       mediaQuery.removeEventListener("change", handleMediaQueryChange);
     };
   }, []);
+
+  // Show static image on mobile, 3D computer on desktop
+  if (isMobile) {
+    return <ComputersStatic />;
+  }
 
   return (
     <Canvas
