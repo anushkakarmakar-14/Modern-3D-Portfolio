@@ -12,25 +12,12 @@ const Earth = () => {
   );
 };
 
-// Static Earth component for mobile
-const EarthStatic = () => {
-  return (
-    <div className="w-full h-full flex items-center justify-center">
-      <img 
-        src="/images/earth-static.png" 
-        alt="Earth" 
-        className="w-64 h-64 object-contain opacity-90"
-      />
-    </div>
-  );
-};
-
 const EarthCanvas = () => {
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
     // Check if mobile
-    const mediaQuery = window.matchMedia("(max-width: 500px)");
+    const mediaQuery = window.matchMedia("(max-width: 768px)");
     setIsMobile(mediaQuery.matches);
 
     const handleMediaQueryChange = (event) => {
@@ -44,9 +31,9 @@ const EarthCanvas = () => {
     };
   }, []);
 
-  // Show static image on mobile, 3D Earth on desktop
+  // Completely remove Earth component on mobile
   if (isMobile) {
-    return <EarthStatic />;
+    return null;
   }
 
   return (

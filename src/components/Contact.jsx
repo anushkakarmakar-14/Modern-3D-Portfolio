@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import emailjs from "@emailjs/browser";
 
@@ -14,8 +14,24 @@ const Contact = () => {
     email: "",
     message: "",
   });
-
   const [loading, setLoading] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  // Add mobile detection
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(max-width: 768px)");
+    setIsMobile(mediaQuery.matches);
+
+    const handleMediaQueryChange = (event) => {
+      setIsMobile(event.matches);
+    };
+
+    mediaQuery.addEventListener("change", handleMediaQueryChange);
+
+    return () => {
+      mediaQuery.removeEventListener("change", handleMediaQueryChange);
+    };
+  }, []);
 
   const handleChange = (e) => {
     const { target } = e;
@@ -66,11 +82,11 @@ const Contact = () => {
 
   return (
     <div
-      className={`xl:mt-12 flex xl:flex-row flex-col-reverse gap-10 overflow-hidden`}
+      className={`xl:mt-12 flex ${isMobile ? 'flex-col' : 'xl:flex-row flex-col-reverse'} gap-10 overflow-hidden`}
     >
       <motion.div
         variants={slideIn("left", "tween", 0.2, 1)}
-        className='flex-[0.75] bg-black-100 p-8 rounded-2xl'
+        className={`${isMobile ? 'w-full' : 'flex-[0.75]'} bg-black-100 p-8 rounded-2xl`}
       >
         <p className={styles.sectionSubText}>Get in touch</p>
         <h3 className={styles.sectionHeadText}>Contact.</h3>
@@ -123,12 +139,15 @@ const Contact = () => {
         </form>
       </motion.div>
 
-      <motion.div
-        variants={slideIn("right", "tween", 0.2, 1)}
-        className='xl:flex-1 xl:h-auto md:h-[550px] h-[350px]'
-      >
-        <EarthCanvas />
-      </motion.div>
+      {/* Earth Container - Only show on desktop */}
+      {!isMobile && (
+        <motion.div
+          variants={slideIn("right", "tween", 0.2, 1)}
+          className='xl:flex-1 xl:h-auto md:h-[550px] h-[350px]'
+        >
+          <EarthCanvas />
+        </motion.div>
+      )}
     </div>
   );
 };
